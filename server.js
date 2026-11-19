@@ -28,6 +28,8 @@ app.use((req, res, next) => {
 app.use(cors());
 app.use(express.json());
 
+// route publique, avant le middleware auth
+app.get("/api/users/:userId/articles", usersController.getArticles);
 app.use("/api/users", authMiddleware, userRouter);
 app.use("/api/articles", authMiddleware, articleRouter);
 app.post("/login", usersController.login);
