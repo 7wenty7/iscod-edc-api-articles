@@ -28,7 +28,7 @@ class UsersController {
   // La méthode me()
   async me(req, res, next) {
     try {
-      const id = req.user.userId;
+      const id = req.user._id;
       const user = await usersService.get(id);
       if (!user) {
         throw new NotFoundError();

@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.5.10/css/pico.min.css">
+<script src="/socket.io/socket.io.js"></script>
+
+<body>
+  <main class="container">
+    <h1>Articles en temps réel</h1>
+    <ul id="events"></ul>
+  </main>
+</body>
+
+<script>
+  const socket = io();
+  const list = document.getElementById("events");
+
+  ["article:create", "article:update", "article:delete"].forEach((event) => {
+    socket.on(event, (data) => {
+      const li = document.createElement("li");
+      li.textContent = event + " : " + JSON.stringify(data);
+      list.appendChild(li);
+    });
+  });
+</script>
